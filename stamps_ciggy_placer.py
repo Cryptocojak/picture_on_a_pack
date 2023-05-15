@@ -49,7 +49,7 @@ def shear_image(
     output_image = output_image.crop(bbox)
 
     # Open the render image
-    render_image = Image.open("render.png")
+    render_image = Image.open(image_path)
     # Perform a final resize of the image
     output_image = output_image.resize((final_width, final_height))
     # Paste the sheared and resized image onto the render image at the target location
