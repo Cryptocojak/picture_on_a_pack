@@ -14,6 +14,10 @@ def shear_image(
 ):
     # Open the input image
     input_image = Image.open(image_path)
+    # Calculate the desired width based on the aspect ratio
+    desired_width = int(input_image.height * 0.9643)
+    # Resize the image to the desired aspect ratio
+    input_image = input_image.resize((desired_width, input_image.height))
     # Resize the input image to final size
     input_image = input_image.resize((final_width, final_height))
 
@@ -48,6 +52,10 @@ def shear_image(
     bbox = output_image.getbbox()
     # Crop the image to the non-transparent bounding box
     output_image = output_image.crop(bbox)
+    # Get the new width and height after cropping
+    working_width, working_height = output_image.size
+    # Resize the image
+    output_image = output_image.resize((working_width, working_height))
 
     # Open the render image
     render_image = Image.open("render.png")
