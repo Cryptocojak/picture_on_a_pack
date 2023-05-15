@@ -1,6 +1,6 @@
 from PIL import Image
 
-def shear_image(image_path, output_path, y_angle, expand_factor, final_width, final_height, target_location):
+def shear_image(image_path, output_path, y_angle, x_angle, expand_factor, final_width, final_height, target_location):
     # Open the input image
     input_image = Image.open(image_path)
     # Calculate the desired width based on the aspect ratio
@@ -53,28 +53,43 @@ def shear_image(image_path, output_path, y_angle, expand_factor, final_width, fi
     # Save the output image
     render_image.save(output_path)
 
-# Set the angles for shearing
-y_angle = 10  
-x_angle = 0.5
+def main():
+    # Set the angles for shearing
+    y_angle = 10  
+    x_angle = 0.5
 
-# Ask user for the image name
-image_name = input("Please enter the image name: ")
+    # Ask user for the image name
+    image_name = input("Please enter the image name: ")
 
-# Specify the input and output file paths
-input_path = image_name + ".png"
-output_path = "output.png"
+    # Specify the input and output file paths
+    input_path = image_name + ".png"
+    output_path = "output.png"
 
-# Specify the expansion factor (adjust as needed)
-expand_factor = 1  # Adjust the value to control the amount of expansion
+    # Specify the expansion factor (adjust as needed)
+    expand_factor = 1  # Adjust the value to control the amount of expansion
 
-# Set the final width and height before pasting the sheared image onto the render image
-final_width = 675
-final_height = 700
+    # Set the final width and height before pasting the sheared image onto the render image
+    final_width = 675
+    final_height = 700
 
-# Specify the target location to overlay the image
-target_location = (585, 740)  # Adjust the coordinates as per your requirement
+    # Specify the target location to overlay the image
+    target_location = (585, 740)  # Adjust the coordinates as per your requirement
 
-# Call the shear_image function
-shear_image(input_path, output_path, y_angle, expand_factor, final_width, final_height, target_location)
+    # Call the shear_image function
+    shear_image(input_path, output_path, y_angle, x_angle, expand_factor, final_width, final_height, target_location)
 
-print("\n\n\n\n\n\n\n\n                                                 ~~\n                                                  ~~\n                                                 ~~\n                                                 ~~\n                                                  ~~\n                                                  ~~\n                                                 ~~\n                                                 ~~\n____________________________________________      ~~\n|        |    cigbot    loves    you        |||||||\n^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n\n\n\n")
+    print("""\
+                                                 ~~
+                                                  ~~
+                                                 ~~
+                                                 ~~
+                                                  ~~
+                                                  ~~
+                                                 ~~
+                                                 ~~
+____________________________________________      ~~
+|        |    cigbot    loves    you        |||||||
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^""")
+
+if __name__ == "__main__":
+    main()
