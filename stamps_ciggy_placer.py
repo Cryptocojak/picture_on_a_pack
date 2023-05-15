@@ -2,14 +2,14 @@ from PIL import Image
 
 
 def shear_image(
-    image_path,
-    output_path,
-    y_angle,
-    x_angle,
-    expand_factor,
-    final_width,
-    final_height,
-    target_location,
+    image_path: str,
+    output_path: str,
+    x_angle: float,
+    y_angle: float,
+    expand_factor: float,
+    final_width: float,
+    final_height: float,
+    target_location: tuple,
 ):
     # Open the input image
     input_image = Image.open(image_path)
@@ -21,8 +21,8 @@ def shear_image(
     input_image = input_image.resize((final_width, final_height))
 
     # Calculate the shear factor
-    shear_factor_y = y_angle * 0.0174533  # Convert angle to radians
     shear_factor_x = x_angle * 0.0174533  # I'm bad at math what's a radian?
+    shear_factor_y = y_angle * 0.0174533  # Convert angle to radians
     # Calculate the maximum displacement caused by the shearing transformation
     max_displacement = abs(shear_factor_y) * input_image.height
     # Calculate the amount of expansion needed to accommodate the maximum displacement
@@ -70,16 +70,16 @@ def shear_image(
 
 
 def main():
-    # Set the angles for shearing
-    y_angle = 10
-    x_angle = 0.5
-
     # Ask user for the image name
     image_name = input("Please enter the image name: ")
 
     # Specify the input and output file paths
     input_path = image_name + ".png"
     output_path = "output.png"
+
+    # Set the angles for shearing
+    y_angle = 10
+    x_angle = 0.5
 
     # Specify the expansion factor (adjust as needed)
     expand_factor = 1  # Adjust the value to control the amount of expansion
@@ -93,14 +93,14 @@ def main():
 
     # Call the shear_image function
     shear_image(
-        input_path,
-        output_path,
-        y_angle,
-        x_angle,
-        expand_factor,
-        final_width,
-        final_height,
-        target_location,
+        image_path=input_path,
+        output_path=output_path,
+        x_angle=x_angle,
+        y_angle=y_angle,
+        expand_factor=expand_factor,
+        final_width=final_width,
+        final_height=final_height,
+        target_location=target_location,
     )
 
     print(
