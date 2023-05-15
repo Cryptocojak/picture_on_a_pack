@@ -13,10 +13,6 @@ def shear_image(
 ):
     # Open the input image
     input_image = Image.open(image_path)
-    # Calculate the desired width based on the aspect ratio
-    desired_width = int(input_image.height * 0.9643)
-    # Resize the image to the desired aspect ratio
-    input_image = input_image.resize((desired_width, input_image.height))
     # Resize the input image to final size
     input_image = input_image.resize((final_width, final_height))
 
