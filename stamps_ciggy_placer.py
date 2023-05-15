@@ -1,6 +1,16 @@
 from PIL import Image
 
-def shear_image(image_path, output_path, y_angle, x_angle, expand_factor, final_width, final_height, target_location):
+
+def shear_image(
+    image_path,
+    output_path,
+    y_angle,
+    x_angle,
+    expand_factor,
+    final_width,
+    final_height,
+    target_location,
+):
     # Open the input image
     input_image = Image.open(image_path)
     # Calculate the desired width based on the aspect ratio
@@ -17,7 +27,7 @@ def shear_image(image_path, output_path, y_angle, x_angle, expand_factor, final_
     max_displacement = abs(shear_factor_y) * input_image.height
     # Calculate the amount of expansion needed to accommodate the maximum displacement
     expand_pixels = int(max_displacement + input_image.height * expand_factor)
-    #set variables
+    # set variables
     working_height = final_height
     working_width = final_width
     # Calculate the new size for the transparent layer
@@ -34,7 +44,12 @@ def shear_image(image_path, output_path, y_angle, x_angle, expand_factor, final_
     # Define the shearing matrix
     shear_matrix = (1, shear_factor_x, 0, shear_factor_y, 1, 0)
     # Apply the shearing transformation
-    output_image = output_image.transform((working_width, working_height), Image.AFFINE, shear_matrix, resample=Image.BICUBIC)
+    output_image = output_image.transform(
+        (working_width, working_height),
+        Image.AFFINE,
+        shear_matrix,
+        resample=Image.BICUBIC,
+    )
     # Find the non-transparent bounding box of the sheared image
     bbox = output_image.getbbox()
     # Crop the image to the non-transparent bounding box
@@ -53,9 +68,10 @@ def shear_image(image_path, output_path, y_angle, x_angle, expand_factor, final_
     # Save the output image
     render_image.save(output_path)
 
+
 def main():
     # Set the angles for shearing
-    y_angle = 10  
+    y_angle = 10
     x_angle = 0.5
 
     # Ask user for the image name
@@ -76,9 +92,19 @@ def main():
     target_location = (585, 740)  # Adjust the coordinates as per your requirement
 
     # Call the shear_image function
-    shear_image(input_path, output_path, y_angle, x_angle, expand_factor, final_width, final_height, target_location)
+    shear_image(
+        input_path,
+        output_path,
+        y_angle,
+        x_angle,
+        expand_factor,
+        final_width,
+        final_height,
+        target_location,
+    )
 
-    print("""\
+    print(
+        """\
                                                  ~~
                                                   ~~
                                                  ~~
@@ -89,7 +115,9 @@ def main():
                                                  ~~
 ____________________________________________      ~~
 |        |    cigbot    loves    you        |||||||
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^""")
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"""
+    )
+
 
 if __name__ == "__main__":
     main()
