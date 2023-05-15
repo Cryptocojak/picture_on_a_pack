@@ -23,12 +23,9 @@ def shear_image(
     max_displacement = abs(shear_factor_y) * input_image.height
     # Calculate the amount of expansion needed to accommodate the maximum displacement
     expand_pixels = int(max_displacement + input_image.height * expand_factor)
-    # set variables
-    working_height = final_height
-    working_width = final_width
     # Calculate the new size for the transparent layer
-    working_width += expand_pixels
-    working_height += expand_pixels
+    working_width = final_width + expand_pixels
+    working_height = final_height + expand_pixels
     # Create a new transparent image with the expanded size
     output_image = Image.new("RGBA", (working_width, working_height), (0, 0, 0, 0))
 
@@ -50,10 +47,6 @@ def shear_image(
     bbox = output_image.getbbox()
     # Crop the image to the non-transparent bounding box
     output_image = output_image.crop(bbox)
-    # Get the new width and height after cropping
-    working_width, working_height = output_image.size
-    # Resize the image
-    output_image = output_image.resize((working_width, working_height))
 
     # Open the render image
     render_image = Image.open("render.png")
