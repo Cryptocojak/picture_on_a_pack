@@ -1,3 +1,4 @@
+import math
 from PIL import Image
 
 
@@ -17,8 +18,8 @@ def shear_image(
     input_image = input_image.resize((final_width, final_height))
 
     # Calculate the shear factor
-    shear_factor_x = x_angle * 0.0174533  # I'm bad at math what's a radian?
-    shear_factor_y = y_angle * 0.0174533  # Convert angle to radians
+    shear_factor_x = x_angle * (math.pi / 180)  # Convert angle to radians
+    shear_factor_y = y_angle * (math.pi / 180)  # There are 2pi radians in a 360degree circle
     # Calculate the maximum displacement caused by the shearing transformation
     max_displacement = abs(shear_factor_y) * input_image.height
     # Calculate the amount of expansion needed to accommodate the maximum displacement
