@@ -1,5 +1,5 @@
 import math
-from PIL import Image
+from PIL import Image, ImageTransform, ImageFilter
 
 
 def shear_image(
@@ -44,9 +44,9 @@ def shear_image(
     # Apply the shearing transformation
     output_image = output_image.transform(
         (working_width, working_height),
-        Image.AFFINE,
+        Image.Transform.AFFINE,
         shear_matrix,
-        resample=Image.BICUBIC,
+        resample=Image.Resampling.BICUBIC,
     )
     # Find the non-transparent bounding box of the sheared image
     bbox = output_image.getbbox()
@@ -58,7 +58,7 @@ def shear_image(
     output_image = output_image.resize((working_width, working_height))
 
     # Open the render image
-    render_image = Image.open("render.png")
+    render_image = Image.open("render1.png")
     # Perform a final resize of the image
     output_image = output_image.resize((final_width, final_height))
     # Paste the sheared and resized image onto the render image at the target location
